@@ -260,7 +260,7 @@
             } else if (event.keyCode === 8 && this.toDeleteFlag) {
                 this.removeLastBubble();
             } else if (this.options.separator) {
-                if (text.length === position) {
+                if (text.length >= position) {
                     for (var i = 0; i < this.options.separator.length; ++i) {
                         if (text.indexOf(this.options.separator[i]) !== -1) {
                             var _text = text.replace(this.options.separator[i], '');
