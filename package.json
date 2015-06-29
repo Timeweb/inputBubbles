@@ -1,6 +1,6 @@
 {
   "name": "input-bubbles",
-  "version": "0.10.3",
+  "version": "0.10.4",
   "description": "Adding text bubbles into HTML elements with typesetting",
   "main": "./dist/js/input-bubbles.js",
   "devDependencies": {
