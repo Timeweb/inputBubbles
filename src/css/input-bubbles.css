@@ -58,4 +58,5 @@
     outline: 0 solid transparent;
     margin-left: -2px;
     padding-left: 3px;
+    min-height: 14px;
 }

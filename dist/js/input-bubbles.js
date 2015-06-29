@@ -51,6 +51,7 @@
             range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
             range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
             selection = window.getSelection();//get the selection object (allows you to change selection)
+            console.log(selection);
             selection.removeAllRanges();//remove any selections already made
             selection.addRange(range);//make the range you have just created the visible selection
         }
@@ -164,7 +165,7 @@
          * @param params
          */
         this.addBubble = function(text) {
-            var _text = (text ? text : this.innerElement.innerText).trim();
+            var _text = (text ? text : this.innerElement.textContent).trim();
             if (!_text) {
                 return;
             }
@@ -179,7 +180,7 @@
             _nodes.push(div);
 
             div.querySelector('.ui-bubble-remove').addEventListener('click', _removeBubble.bind(this));
-            this.innerElement.innerText = '';
+            this.innerElement.textContent = '';
             this.innerElement.focus();
 
             if (this.add || typeof this.add === 'function') {
@@ -263,7 +264,7 @@
             var allNodes =  _getAllNodes.call(this);
             for(var i = 0; i < allNodes.length; ++i) {
                 _nodes.push(allNodes[i]);
-                _values.push(allNodes[i].querySelector('.ui-bubble-content').innerText);
+                _values.push(allNodes[i].querySelector('.ui-bubble-content').textContent);
             }
         };
 
@@ -351,9 +352,9 @@
         function _onKeyUp(event) {
 
             var position = cursorManager.getCaretPosition(this.innerElement);
-            var text = this.innerElement.innerText;
+            var text = this.innerElement.textContent;
 
-            if ((event.keyCode === 32 && !this.options.allowSpaces && text.length === position) || (event.keyCode === 13 && !this.options.allowEnter)) {
+            if ((event.keyCode === 32 && !this.options.allowSpaces && text.length >= position) || (event.keyCode === 13 && !this.options.allowEnter)) {
                 this.addBubble();
             } else if (event.keyCode === 8 && this.toDeleteFlag) {
                 this.removeLastBubble();
@@ -363,7 +364,7 @@
                         if (text.indexOf(this.options.separator[i]) !== -1) {
                             var _text = text.replace(this.options.separator[i], '');
                             if (!_text) {
-                                this.innerElement.innerText = '';
+                                this.innerElement.textContent = '';
                                 this.innerElement.focus();
                             } else {
                                 this.addBubble(text.replace(this.options.separator[i], ''));
@@ -374,7 +375,7 @@
                 }
             }
 
-            if (!this.innerElement.innerText.trim() || position === 0) {
+            if (!this.innerElement.textContent.trim() || position === 0) {
                 this.toDeleteFlag = true;
             } else {
                 this.toDeleteFlag = false;
@@ -387,7 +388,7 @@
 
         function _onPaste() {
             setTimeout(function() {
-                this.addBubble(_escapeHtml(this.innerElement.innerText));
+                this.addBubble(_escapeHtml(this.innerElement.textContent));
             }.bind(this), 0);
         }
 
@@ -404,6 +405,7 @@
             this.element.appendChild(this.innerElement);
 
             this.element.addEventListener('focus', function() {
+                this.innerElement.focus();
                 cursorManager.setEndOfContenteditable(this.innerElement);
             }.bind(this));
 
