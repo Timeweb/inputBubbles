@@ -116,7 +116,7 @@ To get started you need 3 things in your page:
 
  * `element` - Is necessary for native usage only. DOM-element, which will be transformed to container with bubbles and input field.
  * `width` - Width of container in pixels.
- * `height` - Maximum of height of container in pixels.
+ * `height` - Minimum of height of container in pixels.
  * `bubbleTextWidth` - Maximum width of bubble's INNER text container. If this options is defined, too large text will be shown with three dots
  * `separator` - Array with symbols-delimeters. Once you type one of this symbols, next bubble will be created. For example: 
  
