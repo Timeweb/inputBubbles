@@ -60,3 +60,8 @@
     padding-left: 3px;
     min-height: 14px;
 }
+
+.input-bubbles-placeholder{
+    position: absolute;
+    color: #656565;
+}

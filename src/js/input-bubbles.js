@@ -219,11 +219,22 @@
             this.element.style.minHeight = this.options.height + 'px';
             this.element.style.width = this.options.width + 'px';
 
+            _clear.call(this);
+
+            if (typeof options.placeholder !== 'undefined') {
+                if (typeof options.placeholderClass !== 'undefined') {
+                    _makePlaceholder.call(this, options.placeholder, options.placeholderClass);
+                } else {
+                    _makePlaceholder.call(this, options.placeholder);
+                }
+            }
+
             _makeEditable.call(this);
 
             this.innerElement.addEventListener('keyup', _onKeyUp.bind(this));
             this.innerElement.addEventListener('keydown', _onKeyDown.bind(this));
             this.innerElement.addEventListener('paste', _onPaste.bind(this));
+            this.innerElement.addEventListener('input', _onInput.bind(this));
 
             var newGuid = _guid();
             this.initialized[newGuid] = this;
@@ -245,6 +256,8 @@
         }
 
         function _onKeyDown(event) {
+            _togglePlaceholder.call(this);
+
             if (event.keyCode === 13) {
                 event.preventDefault();
             }
@@ -276,14 +289,30 @@
                 }
             }
 
-            if (!this.innerElement.textContent.trim() || position === 0) {
+            text = this.innerElement.textContent.trim();
+
+            if (!text || position === 0) {
                 this.toDeleteFlag = true;
             } else {
                 this.toDeleteFlag = false;
             }
 
+            _togglePlaceholder.call(this);
+
             if (this.keyup || typeof this.keyup === 'function') {
                 this.keyup(event);
+            }
+        }
+
+        function _togglePlaceholder() {
+            var text = this.innerElement.textContent.trim();
+
+            if (typeof this.placeholderElement !== 'undefined') {
+                if (!text && !_nodes.length){
+                    this.placeholderElement.style.display = 'block';
+                } else {
+                    this.placeholderElement.style.display = 'none';
+                }
             }
         }
 
@@ -293,11 +322,24 @@
             }.bind(this), 0);
         }
 
-        function _makeEditable() {
+        function _onInput() {
+            _togglePlaceholder.call(this);
+        }
+
+        function _clear() {
             while (this.element.firstChild) {
                 this.element.removeChild(this.element.firstChild);
             }
+        }
 
+        function _makePlaceholder(text, className) {
+            this.placeholderElement = document.createElement('div');
+            this.placeholderElement.className = 'input-bubbles-placeholder ' + (typeof className !== 'undefined' ? className : '');
+            this.placeholderElement.textContent = text;
+            this.element.appendChild(this.placeholderElement);
+        }
+
+        function _makeEditable() {
             this.element.setAttribute('tabindex', 1);
 
             this.innerElement = document.createElement('div');

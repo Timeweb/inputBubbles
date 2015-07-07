@@ -128,6 +128,8 @@ To get started you need 3 things in your page:
  
  * `allowSpaces` - This options allows typing whitespaces in bubbles without creating new bubble after each whitespace.
  * `allowEnter` - This options doesn't prevents default functionality of enter key and doesn't create new bubble after each enter key pressing.
+ * `placeholder` - Adds placeholder to your container. 
+ * `placeholderClass` - Custom class for placeholder.
  
  
 ### Methods
