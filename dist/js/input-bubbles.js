@@ -261,10 +261,15 @@
             _nodes = [];
 
             var allNodes =  _getAllNodes.call(this);
+
             for(var i = 0; i < allNodes.length; ++i) {
-                _nodes.push(allNodes[i]);
-                _values.push(allNodes[i].querySelector('.ui-bubble-content').textContent);
+                if(allNodes[i].className.indexOf('input-bubbles-placeholder') === -1) {
+                    _nodes.push(allNodes[i]);
+                    _values.push(allNodes[i].querySelector('.ui-bubble-content').textContent);
+                }
             }
+
+            _togglePlaceholder.call(this);
         };
 
         return function(options) {

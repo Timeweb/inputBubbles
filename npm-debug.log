@@ -1,0 +1,107 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'publish' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.37
+4 verbose node symlink /usr/bin/node
+5 verbose publish [ '.' ]
+6 verbose cache add [ '.', null ]
+7 verbose cache add name=undefined spec="." args=[".",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: '.',
+8 verbose parsed url   path: '.',
+8 verbose parsed url   href: '.' }
+9 silly lockFile 3a52ce78- .
+10 verbose lock . /root/.npm/3a52ce78-.lock
+11 verbose tar pack [ '/root/.npm/input-bubbles/0.10.5/package.tgz', '.' ]
+12 verbose tarball /root/.npm/input-bubbles/0.10.5/package.tgz
+13 verbose folder .
+14 info prepublish input-bubbles@0.10.5
+15 silly lockFile 1f1177db-tar tar://.
+16 verbose lock tar://. /root/.npm/1f1177db-tar.lock
+17 silly lockFile 29ce9c76-input-bubbles-0-10-5-package-tgz tar:///root/.npm/input-bubbles/0.10.5/package.tgz
+18 verbose lock tar:///root/.npm/input-bubbles/0.10.5/package.tgz /root/.npm/29ce9c76-input-bubbles-0-10-5-package-tgz.lock
+19 silly lockFile 1f1177db-tar tar://.
+20 silly lockFile 1f1177db-tar tar://.
+21 silly lockFile 29ce9c76-input-bubbles-0-10-5-package-tgz tar:///root/.npm/input-bubbles/0.10.5/package.tgz
+22 silly lockFile 29ce9c76-input-bubbles-0-10-5-package-tgz tar:///root/.npm/input-bubbles/0.10.5/package.tgz
+23 silly lockFile 22d59904-npm-input-bubbles-0-10-5-package /root/.npm/input-bubbles/0.10.5/package
+24 verbose lock /root/.npm/input-bubbles/0.10.5/package /root/.npm/22d59904-npm-input-bubbles-0-10-5-package.lock
+25 silly lockFile 22d59904-npm-input-bubbles-0-10-5-package /root/.npm/input-bubbles/0.10.5/package
+26 silly lockFile 22d59904-npm-input-bubbles-0-10-5-package /root/.npm/input-bubbles/0.10.5/package
+27 silly lockFile 3a52ce78- .
+28 silly lockFile 3a52ce78- .
+29 silly publish { name: 'input-bubbles',
+29 silly publish   version: '0.10.5',
+29 silly publish   description: 'Adding text bubbles into HTML elements with typesetting',
+29 silly publish   main: './dist/js/input-bubbles.js',
+29 silly publish   devDependencies:
+29 silly publish    { grunt: '^0.4.5',
+29 silly publish      'grunt-contrib-concat': '^0.5.1',
+29 silly publish      'grunt-contrib-cssmin': '^0.12.3',
+29 silly publish      'grunt-contrib-uglify': '^0.9.1' },
+29 silly publish   dependencies: {},
+29 silly publish   scripts: { test: 'echo "Error: no test specified" && exit 1' },
+29 silly publish   repository:
+29 silly publish    { type: 'git',
+29 silly publish      url: 'https://github.com/lutaev/inputBubbles.git' },
+29 silly publish   keywords: [ 'typing', 'bubbles', 'panels', 'input' ],
+29 silly publish   author: { name: 'Artyom Dergunov', email: 'lutaev.stepan@yandex.ru' },
+29 silly publish   license: 'MIT',
+29 silly publish   bugs: { url: 'https://github.com/lutaev/inputBubbles/issues' },
+29 silly publish   homepage: 'https://github.com/lutaev/inputBubbles',
+29 silly publish   readme: '#inputBubbles\n\ninputBubbles is a javascript plugin, that can help transfom text in text fields in small panels (bubbles). It is absolutely free, [open source](https://github.com/lutaev/inputBubbles) and distributed under the MIT license.\n\n This plugin is very simple and may be used native or as jQuery plugin. \n\n \n \n## Installing input-bubbles \n\nYou can install this package locally either with `npm`, or `bower`. \n\n### npm\n\nTo install latest formal release \n```shell\nnpm install input-bubbles\n```\n\nTo install latest release and update package.json\n```shell\nnpm install input-bubbles --save-dev\n```\n\n### bower\n\nTo get the latest stable version, use bower from the command line.\n```shell\nbower install input-bubbles\n```\n\nTo save the bower settings for future use:\n```shell\nbower install input-bubbles --save\n```\n\nLater, you can use easily update with:\n```shell\nbower update\n```\n\n\n\n## Usage\n\n### Include all neccessary files\nTo get started you need 3 things in your page:\n 1. A css file with styles for bubbles\n 2. The javascript source file\n 3. jQuery library (optional, if you want)\n \n```html\n<link type="text/css" rel="stylesheet" href="dist/css/input-bubbles.min.css">\n\n<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>\n<script src="dist/js/input-bubbles.min.js"></script>\n```\n\n\n\n### Initialize container for bubbles (native)\n\n#### Simple usage:\n\n```html\n<div id="bubbleWrapper"></div>\n\n<script>\n    var bubblesObj = inputBubbles(document.getElementById(\'bubbleWrapper\'));\n</script>\n```\n\n#### Initialize as jQuery plugin\n\n```html\n<div id="bubbleWrapper"></div>\n\n<script>\n    var bubbles = $(\'#bubbleWrapper\').inputBubbles({\n        width: 500,\n        height: 50\n    });\n</script>\n```\n\n\n\n### Options\n\n#### Setting options with native initialization\n```javascript\n     // Initialization\n     var bubbles = inputBubbles({\n         element: document.getElementById(\'bubbleWrapper\'),   \n         width: 500,\n         height: 30\n     });\n     \n     // Setting after initialization\n     bubbles.set(\'allowSpaces\', true);\n ```\n \n#### As jQuery plugin\n```javascript\n    // Initialization\n    $(\'#bubbleWrapper\').inputBubbles({ \n        width: 500,\n        height: 30\n    });\n      \n    // Setting after initialization, with jQuery use method "set"\n    $(\'#bubbleWrapper\').inputBubbles(\'set\', \'maxLength\', 15);\n```\n\n#### Available options are:\n\n * `element` - Is necessary for native usage only. DOM-element, which will be transformed to container with bubbles and input field.\n * `width` - Width of container in pixels.\n * `height` - Minimum of height of container in pixels.\n * `bubbleTextWidth` - Maximum width of bubble\'s INNER text container. If this options is defined, too large text will be shown with three dots\n * `separator` - Array with symbols-delimeters. Once you type one of this symbols, next bubble will be created. For example: \n \n ```javascript\n     $(\'#bubbleWrapper\').inputBubbles({\n         separator: [\',\', \':\']\n     });\n ```\n \n * `allowSpaces` - This options allows typing whitespaces in bubbles without creating new bubble after each whitespace.\n * `allowEnter` - This options doesn\'t prevents default functionality of enter key and doesn\'t create new bubble after each enter key pressing.\n * `placeholder` - Adds placeholder to your container. \n * `placeholderClass` - Custom class for placeholder.\n \n \n### Methods\n\n#### Calls method with native initialization\n```javascript\n     // Initialization\n     var bubbles = inputBubbles({\n         element: document.getElementById(\'bubbleWrapper\'),\n         click: function() {\n            alert(\'click\'!)\n         }\n     });\n     \n     // Calling after initialization\n     bubbles.trigger(\'click\');\n ```\n \n#### As jQuery plugin\n```javascript\n    // Initialization\n    $(\'#bubbleWrapper\').inputBubbles({ \n        width: 500,\n        height: 30\n    });\n      \n    // Calling after initialization\n    $(\'#bubbleWrapper\').inputBubbles(\'trigger\', \'click\');\n``` \n \n#### Available methods are:\n\n * `set` - This method sets an option after initialization.\n \n ```javascript\n     $(\'#bubbleWrapper\').inputBubbles(\'set\', \'maxLength\', 15);\n ```\n \n * `on` - Adds an event listener after initialization\n \n ```javascript\n     $(\'#bubbleWrapper\').inputBubbles(\'on\', \'click\', function(event) {\n         console.log(event.currentTarget.innerText);   \n     });\n ```\n \n * `trigger` - Triggers event, which was defined earlier\n \n ```javascript\n     $(\'#bubbleWrapper\').inputBubbles(\'trigger\', \'click\');\n ```\n \n * `addBubble` - Using this method, you can manually add new bubble. \n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'addBubble\', \'I am a bubble!\');\n ```\n \n * `removeBubble` - Removes selected bubble. Parameter must be a DOM-element\n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'removeBubble\', $(\'#someBubbleId\')[0]);        \n ```  \n \n * `removeLastBubble` - Removes last bubble\n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'removeLastBubble\');\n ```  \n \n * `clearAll` Removes all bubbles\n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'clearAll\');\n ```\n \n * `values` Returns text content of all bubbles as array of strings\n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'values\');\n ```\n \n * `nodes` Returns all bubbles as array of DOM-elements\n \n ```javascript\n      $(\'#bubbleWrapper\').inputBubbles(\'nodes\');\n ```\n \n * `refreshData` Refreshes values and bubbles data (gets data from DOM)\n\n ```javascript\n     $(\'#bubbleWrapper\').inputBubbles(\'refreshData\');\n ```\n\n\n\n### Events\n\n#### Adds an event listener with native initialization\n```javascript\n     // Initialization\n     var bubbles = inputBubbles({\n         element: document.getElementById(\'bubbleWrapper\'),\n         click: function() {\n            alert(\'click\'!)\n         }\n     });\n     \n     // After initialization\n     bubbles.on(\'keyup\', function(event) {\n        console.log(event)\n     });\n ```\n \n#### As jQuery plugin\n```javascript\n    // Initialization\n    $(\'#bubbleWrapper\').inputBubbles({ \n        width: 500,\n        height: 30,\n        keyup: function(event) {\n            console.log(event);    \n        }\n    });\n      \n    // After initialization\n    $(\'#bubbleWrapper\').inputBubbles(\'on\', \'click\', function(event) {\n        console.log(event.currentTarget.innerText);   \n    });\n``` \n\n#### Availalble events are:\n\n * `click` - Fires by mouse click on any bubble.\n \n * `keyup` - Fires after input some symbols in text field.\n \n * `remove` - Fires by removing any bubble.\n \n * `clear` - Fires by removing all bubbles (method clearAll).\n\n\n\n\n',
+29 silly publish   readmeFilename: 'README.md',
+29 silly publish   gitHead: '177443b2e350bbfd4e6e74f65292b84112f86faf',
+29 silly publish   _id: 'input-bubbles@0.10.5',
+29 silly publish   _shasum: '487e94b18937689b7f8bd821e5ec44ce5d7718b1',
+29 silly publish   _from: '.' }
+30 verbose request where is /input-bubbles
+31 verbose request registry https://registry.npmjs.org/
+32 verbose request id a8bcf476c428df59
+33 verbose url raw /input-bubbles
+34 verbose url resolving [ 'https://registry.npmjs.org/', './input-bubbles' ]
+35 verbose url resolved https://registry.npmjs.org/input-bubbles
+36 verbose request where is https://registry.npmjs.org/input-bubbles
+37 info trying registry request attempt 1 at 16:50:41
+38 http PUT https://registry.npmjs.org/input-bubbles
+39 http 403 https://registry.npmjs.org/input-bubbles
+40 verbose headers { 'content-type': 'application/json',
+40 verbose headers   'cache-control': 'max-age=60',
+40 verbose headers   'content-length': '105',
+40 verbose headers   'accept-ranges': 'bytes',
+40 verbose headers   date: 'Tue, 07 Jul 2015 13:50:43 GMT',
+40 verbose headers   via: '1.1 varnish',
+40 verbose headers   connection: 'keep-alive',
+40 verbose headers   'x-served-by': 'cache-ams4143-AMS',
+40 verbose headers   'x-cache': 'MISS',
+40 verbose headers   'x-cache-hits': '0',
+40 verbose headers   'x-timer': 'S1436277042.519373,VS0,VE572' }
+41 error publish Failed PUT 403
+42 error Error: You do not have permission to publish 'input-bubbles'. Are you logged in as the correct user? : input-bubbles
+42 error     at RegClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:308:14)
+42 error     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:246:65)
+42 error     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:236:22)
+42 error     at Request.emit (events.js:98:17)
+42 error     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1142:14)
+42 error     at Request.emit (events.js:117:20)
+42 error     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1096:12)
+42 error     at IncomingMessage.emit (events.js:117:20)
+42 error     at _stream_readable.js:944:16
+42 error     at process._tickCallback (node.js:448:13)
+43 error If you need help, you may report this *entire* log,
+43 error including the npm and node versions, at:
+43 error     <http://github.com/npm/npm/issues>
+44 error System Linux 3.13.0-53-generic
+45 error command "/usr/bin/node" "/usr/bin/npm" "publish"
+46 error cwd /home/a.dergunov/Bubbles
+47 error node -v v0.10.37
+48 error npm -v 1.4.28
+49 verbose exit [ 1, true ]
