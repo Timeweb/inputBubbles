@@ -132,7 +132,7 @@ To get started you need 3 things in your page:
  * `placeholderClass` - Custom class for placeholder.
  
 
-#### Setting options with native initialization
+#### Disable all actions
 
 If you want to deny ALL actions with bubbles and save (freeze) current state, just add class 'bubbles-disabled' to main element.
  
