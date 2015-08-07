@@ -186,12 +186,17 @@
             this.innerElement.textContent = '';
             this.innerElement.focus();
 
-            if (this.add || typeof this.add === 'function') {
+            if (this.add && typeof this.add === 'function') {
                 this.add(div, _text);
             }
 
-            if (this.click || typeof this.click === 'function') {
-                div.addEventListener('click', this.click);
+            if (this.click && typeof this.click === 'function') {
+                div.addEventListener('click', function(event){
+                    event.stopPropagation();
+                    if (_isEnabled.call(this)) {
+                        this.click(event);
+                    }
+                }.bind(this));
             }
         };
 
@@ -279,7 +284,8 @@
             var allNodes =  _getAllNodes.call(this);
 
             for(var i = 0; i < allNodes.length; ++i) {
-                if(allNodes[i].className.indexOf('input-bubbles-placeholder') === -1) {
+                if(allNodes[i].className.indexOf('input-bubbles-placeholder') === -1 &&
+                    allNodes[i].className.indexOf('ui-inner-mock') === -1) {
                     _nodes.push(allNodes[i]);
                     _values.push(allNodes[i].querySelector('.ui-bubble-content').textContent);
                 }
@@ -503,7 +509,11 @@
             mockElement.textContent = '.';
             this.element.appendChild(mockElement);
 
-            this.element.addEventListener('focus', function(event) {
+            this.element.addEventListener('click', function(event) {
+                if (event.currentTarget != this.element) {
+                    return false;
+                }
+
                 if (!_isEnabled.call(this)) {
                     event.preventDefault();
                     setTimeout(function(){
