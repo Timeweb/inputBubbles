@@ -66,6 +66,10 @@
          * @param params
          */
         this.addBubble = function(text) {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             var _text = (text ? text : this.innerElement.textContent).trim();
             if (!_text) {
                 return;
@@ -97,6 +101,10 @@
          * Removes bubble
          */
         this.removeBubble = function(node) {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             if (this.remove || typeof this.remove === 'function') {
                 this.remove(node);
             }
@@ -108,6 +116,10 @@
          * Removes last bubble
          */
         this.removeLastBubble = function() {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             if (_nodes.length) {
                 _values.pop();
                 var div = _nodes.pop();
@@ -123,6 +135,10 @@
          * Clear data arrays
          */
         this.clearAll = function() {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             var allNodes =  _getAllNodes.call(this);
             for(var i = 0; i < allNodes.length; ++i) {
                 if (this.remove || typeof this.remove === 'function') {
@@ -249,18 +265,32 @@
         }
 
         function _makeBubble(text) {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             return '<span class="ui-bubble-content" title="' + text + '" style="' +
             (this.options.bubbleTextWidth ? ('max-width: ' + this.options.bubbleTextWidth + 'px') : '') + '">' +
             text + '</span><span class="ui-bubble-remove">x</span>';
         }
 
         function _removeBubble(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
+
             event.stopPropagation();
             var node = event.currentTarget.parentNode;
             this.removeBubble(node);
         }
 
         function _onKeyDown(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
+
             _togglePlaceholder.call(this);
 
             if (event.keyCode === 13) {
@@ -269,6 +299,10 @@
         }
 
         function _onKeyUp(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
 
             var position = cursorManager.getCaretPosition(this.innerElement);
             var text = this.innerElement.textContent;
@@ -321,17 +355,31 @@
             }
         }
 
-        function _onPaste() {
+        function _onPaste(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
+
             setTimeout(function() {
                 this.addBubble(_escapeHtml(this.innerElement.textContent));
             }.bind(this), 0);
         }
 
-        function _onInput() {
+        function _onInput(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
+
             _togglePlaceholder.call(this);
         }
 
         function _clear() {
+            if (!_isEnabled.call(this)) {
+                return false;
+            }
+
             while (this.element.firstChild) {
                 this.element.removeChild(this.element.firstChild);
             }
@@ -345,19 +393,32 @@
         }
 
         function _makeEditable() {
-            this.element.setAttribute('tabindex', 1);
+            this.element.setAttribute('tabindex', '1');
 
             this.innerElement = document.createElement('div');
             this.innerElement.setAttribute('contenteditable', 'true');
             this.innerElement.className = 'ui-inner-editable';
             this.element.appendChild(this.innerElement);
 
-            this.element.addEventListener('focus', function() {
+            var mockElement = document.createElement('div');
+            mockElement.className = 'ui-inner-mock';
+            mockElement.textContent = '.';
+            this.element.appendChild(mockElement);
+
+            this.element.addEventListener('focus', function(event) {
+                if (!_isEnabled.call(this)) {
+                    event.preventDefault();
+                    setTimeout(function(){
+                        this.innerElement.blur();
+                    }.bind(this), 0);
+                    return;
+                }
+
                 this.innerElement.focus();
                 cursorManager.setEndOfContenteditable(this.innerElement);
             }.bind(this));
 
-            this.innerElement.addEventListener('click', function() {
+            this.innerElement.addEventListener('click', function(event) {
                 if (cursorManager.getCaretPosition(this.innerElement) === 0) {
                     this.toDeleteFlag = true;
                 } else {
@@ -396,6 +457,20 @@
             }
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
             s4() + '-' + s4() + s4() + s4();
+        }
+
+        function _isEnabled() {
+            var _classArr = this.element.className.split(' ');
+            if (typeof _classArr.indexOf === 'function') {
+                return _classArr.indexOf('bubbles-disabled') === -1;
+            } else {
+                for (var i = 0; i < _classArr.length; ++i) {
+                    if (_classArr[i] === 'bubbles-disabled') {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
     }
 

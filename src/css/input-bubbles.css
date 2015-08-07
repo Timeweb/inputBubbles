@@ -59,6 +59,17 @@
     margin-left: -2px;
     padding-left: 3px;
     min-height: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.ui-inner-mock{
+    position:relative;
+    top:-50px;
+    z-index: 1;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
 }
 
 .input-bubbles-placeholder{
