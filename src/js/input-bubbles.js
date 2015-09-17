@@ -266,6 +266,14 @@
             var newGuid = _guid();
             this.initialized[newGuid] = this;
             this.element.setAttribute('data-input-bundles', newGuid);
+			
+			if (typeof options.items !== 'undefined' && toString.call(options.items) === '[object Array]') {
+                for (var i = 0; i < options.items.length; ++i) {
+					this.addBubble(options.items[i]);
+				}
+				_togglePlaceholder.call(this);
+				_onKeyUp.call(this, new Event('keyup'));
+            }
 
             return this;
         }
