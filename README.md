@@ -268,6 +268,8 @@ If you want to deny ALL actions with bubbles and save (freeze) current state, ju
 
 #### Availalble events are:
 
+ * `add` - Fires adding new bubble.
+
  * `click` - Fires by mouse click on any bubble.
  
  * `keyup` - Fires after input some symbols in text field.
