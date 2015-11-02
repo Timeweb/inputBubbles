@@ -360,6 +360,7 @@
             this.innerElement.addEventListener('keydown', _onKeyDown.bind(this));
             this.innerElement.addEventListener('paste', _onPaste.bind(this));
             this.innerElement.addEventListener('input', _onInput.bind(this));
+            this.innerElement.addEventListener('blur', _onBlur.bind(this));
 
             var newGuid = _guid();
             this.initialized[newGuid] = this;
@@ -387,6 +388,17 @@
             event.stopPropagation();
             var node = event.currentTarget.parentNode;
             this.removeBubble(node);
+        }
+
+        function _onBlur(event) {
+            if (!_isEnabled.call(this)) {
+                event.preventDefault();
+                return;
+            }
+
+            if (this.innerElement.textContent === '') {
+                this.innerElement.textContent = '';
+            }
         }
 
         function _onKeyDown(event) {
