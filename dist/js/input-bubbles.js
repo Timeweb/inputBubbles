@@ -397,7 +397,7 @@
             }
 
             if (this.innerElement.textContent === '') {
-                this.innerElement.textContent = '';
+                this.innerElement.innerHTML = '';
             }
         }
 
